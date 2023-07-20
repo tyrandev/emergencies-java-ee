@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+    <title>Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <h:outputStylesheet name="css/main.css"/>
+    <h:outputScript name="js/jquery-3.6.0.min.js"/>
+</h:head>
+
+<h:body>
+    <h1>Bonjour #{userControl.loggedInUserLogin}!</h1>
+
+
+    <h1>List d'inscriptions</h1>
+    <h:dataTable value="#{publicationControl.showPublicationByUserId(userControl.loggedInUserId)}"
+                 var="publication"
+                 styleClass="TableP"
+                 headerClass="TableHeader"
+                 rowClass="TableRowOdd,TableRowEven">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            #{publication.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Titre</f:facet>
+            #{publication.titre}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Type</f:facet>
+            #{publication.type}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Actions</f:facet>
+            <h:form>
+                <a href="publication/detailPublication.xhtml?facets-redirect=true&amp;id_publication=#{publication.id}">View</a>
+            </h:form><br/>
+            <h:form>
+            <!-- 
+                <h:commandButton value="Unsubscribe"
+                                 action="#{userControl.unsubscribePublication(Publication.id)}"/>
+             --> 
+			<!-- 
+			<h:commandButton value="#{userControl.subscriptionStr(activity.id)}"
+                                 action="#{userControl.subscription(activity.id)}"/>
+            -->               
+            
+            </h:form>
+        </h:column>
+    </h:dataTable>    
+    
+
+    
+    
+    
+    
+    
+    
+</h:body>
+
+</html>

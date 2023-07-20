@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Start Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <h:outputStylesheet library="css" name="main.css"/>
+    <h:outputStylesheet library="css" name="jquery-ui.css"/>
+    <h:outputScript library="js" name="jquery-3.6.0.min.js"/>
+    <h:outputScript library="js" name="main.js"/>
+</h:head>
+
+<h:body>
+    <h1>Cycles de pleine conscience (mindfulness)</h1>
+    
+    <p>
+		Au sein de son académie mindfulness, Emergences vous propose différentes activités pour découvrir la pleine conscience bienveillante ou approfondir votre pratique :
+		des cycles en 8 semaines "classiques" et d'autres programmes (auto-compassion, préparation à la naissance, intimité,...), des séances hebdomadaires thématiques, des ateliers ou encore des retraites.
+	</p>
+	
+    <h:dataTable value="#{activityControl.showActivityList()}"
+                 var="activity"
+                 styleClass="TableActivity"
+                 headerClass="TableHeader"
+                 rowClass="TableRowOdd,TableRowEven">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            #{activity.id}
+        </h:column>
+        <h:column>            <f:facet name="header">Name</f:facet>
+
+           #{activity.name}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Place</f:facet>
+            #{activity.place} 
+        </h:column>
+        <h:column>            <f:facet name="header">Description</f:facet>
+
+            #{activity.description}
+        </h:column>
+        <h:column>
+            <f:facet name="header">View</f:facet>
+            <a href="activity_details.xhtml?facets-redirect=true&amp;id_activity=#{activity.id}">View</a>
+        </h:column>
+        <h:column rendered="#{userControl.userConnected}">
+            <f:facet name="header">Subscription</f:facet>
+            <h:form>
+                <h:commandButton value="#{userControl.subscriptionStr(activity.id)}"
+                                 action="#{userControl.subscription(activity.id)}"/>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+
+
+    <h:dataTable value="#{publicationControl.showPublicationList()}"
+                 var="publication"
+                 styleClass="TableP"
+                 headerClass="TableHeader"
+                 rowClass="TableRowOdd,TableRowEven">
+        <h:column>
+            <f:facet name="header">ID</f:facet>
+            #{publication.id}
+        </h:column>
+        <h:column>
+        	<f:facet name="header">Titre</f:facet>
+           #{publication.titre}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Prix</f:facet>
+            #{publication.prix} 
+        </h:column>
+        <h:column>
+            <f:facet name="header">View</f:facet>
+            <a href="publication_details.xhtml?facets-redirect=true&amp;id_publication=#{publication.id}">View</a>
+        </h:column>
+        <h:column rendered="#{userControl.userConnected}">
+            <f:facet name="header">Subscription</f:facet>
+            <h:form>
+                <h:commandButton value="Subscribe"
+                                 action="#{userControl.subscribePublication(publication.id)}"/>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+
+
+
+</h:body>
+
+</html>
