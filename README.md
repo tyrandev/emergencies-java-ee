@@ -1,4 +1,4 @@
-Emergencies is a java application which I made during my computer science cursus as an examan.
+Emergencies is a java ee web application which I made during my computer science cursus as an examan.
 MySQL was used as database.
 
 Here are some photos:
